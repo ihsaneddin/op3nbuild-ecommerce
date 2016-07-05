@@ -1,0 +1,41 @@
+<%= render partial: 'admin/balances/shared/sidebar' %>
+
+<h3>Refund Requests History</h3>
+
+<div id="admin_refund_page_wrapper">
+  <div id="admin_refund_grid_wrapper" class='column pretty_table'>
+      <table>
+        <thead>
+        <tr class='odd'>
+          <th class='column1_header'><%= sortable "id" %></th>
+          <th>Order No</th>
+          <th>Amount</th>
+          <th>Reason</th>
+          <th>Note</th>
+          <th>Status</th>
+          <th>Contractor</th>
+          <th>Updated At</th>
+          <th></th>
+        </tr>
+        </thead>
+        <% @transactions.each do |trans| %>
+          <tr class='<%= cycle("odd", "")%>'>
+            <td><%= trans.id %></td>
+            <td><%= trans.context.invoice.order.number %></td>
+            <td><%= number_to_currency trans.context.try(:amount) %></td>
+            <td><%= trans.context.try(:reason) %></td>
+            <td><%= trans.context.try(:note) %></td>
+            <td><%= trans.context.try(:state) %></td>
+            <td><%= link_to trans.balance.user.display_name, contractor_path(trans.balance.user) %></td>
+            <td><%= I18n.localize(trans.updated_at, :format => :us_time) %></td>
+            <td>
+              <%= link_to 'show', admin_balances_requests_refund_path(trans) %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+    <%= will_paginate @transactions %>
+  </div>
+
+</div>

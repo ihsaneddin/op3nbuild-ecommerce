@@ -1,0 +1,55 @@
+<%= render partial: 'admin/balances/shared/sidebar' %>
+
+<div class='row' style='text-align: left;'>
+  <p id="notice"><%= notice %></p>
+
+  <div class='four column'>
+    <h3>Credit Request Details</h3>
+
+    <ul  class='vertical-list width-list'>
+      <li>
+        <label class=''>Requested by:</label>
+        <span class=''><%= @credit.transaksi.balance.user.display_name %></span>
+      </li>
+      <li>
+        <label class=''>Requested at:</label>
+        <span class=''><%=l @credit.created_at, :format => :us_time %></span>
+      </li>
+      <li style='clear:both;'>
+        <label class=''>Amount #:</label>
+        <span class=''><%= number_to_currency @credit.amount %></span>
+      </li>
+        <label class=''>Status:</label>
+        <span class=''><%= @credit.state %></span>
+      </li>
+      <% if @credit.messages.present? %>
+        <li>
+          <label>Messages:</label>
+          <% @credit.messages.each do |message| %>
+              <span class=''><%= message.content %></span>
+          <% end %>
+        </li>
+      <% end %>
+
+      <li></li>
+    </ul>
+    <h4>
+      <%= link_to 'Pay', pay_admin_balances_credit_path(@credit.transaksi), :class => 'button small red-button', method: :put, data: {confirm: "Are you sure?"} if can?(:pay, @credit) && @credit.may_pay? %>
+      <%= link_to 'Reject', '#', :class => 'button small blue-button toggle-element', data: {toggle: "#message-rejected-for-#{@credit.class.name.demodulize.downcase}"} if can?(:reject, @credit) && @credit.may_reject?%>      
+    </h4>
+
+    <%= render partial: 'admin/balances/shared/message_form', locals: {context: @credit, message_url: reject_admin_balances_credit_path(@credit.transaksi), proposed_state: 'rejected' } if can?(:reject, @credit) && @credit.may_reject? %>
+
+  </div>
+
+  <%= link_to 'Back', admin_balances_credits_path, :class => 'button small' %>
+</div>
+
+<h4> Responses </h4>
+
+<%= render partial: 'admin/balances/shared/comments/comments_list', locals: {commentable: @credit, comments: comments_for(@credit).paginate(:page => pagination_page, :per_page => pagination_rows)} %>
+
+<br>
+<div class="">
+  <%= render partial: 'admin/balances/comments/form', locals: {commentable: @credit} %>
+</div>

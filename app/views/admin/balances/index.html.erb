@@ -1,0 +1,33 @@
+<%= render partial: 'admin/balances/shared/sidebar' %>
+
+<h3>Transactions</h3>
+
+<div id="admin_balances_page_wrapper">
+  <div id="admin_balances_grid_wrapper" class='column pretty_table'>
+      <table>
+        <thead>
+        <tr class='odd'>
+          <th class='column1_header'><%= sortable "id" %></th>
+          <th>Type</th>
+          <th>Invoice Amount</th>
+          <th>Status</th>
+          <th>Amount</th>
+          <th>Updated at</th>
+        </tr>
+        </thead>
+        <% @transactions.each do |trans| %>
+          <tr class='<%= cycle("odd", "")%>'>
+            <td><%= trans.id %></td>
+            <td><%= trans.tipe.capitalize %></td>
+            <td><%= number_to_currency(trans.context.try(:invoice).total_contractor_credit) rescue nil %></td>
+            <td><%= trans.context.try(:state) %></td>
+            <td><%= number_to_currency trans.context.try(:amount) %></td>
+            <td><%= I18n.localize(trans.updated_at, :format => :us_time) %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    <%= will_paginate @transactions %>
+  </div>
+
+</div>

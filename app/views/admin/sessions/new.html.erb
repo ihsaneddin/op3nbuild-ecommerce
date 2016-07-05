@@ -1,0 +1,66 @@
+<div class="container" style="margin-top: -45px;width: 30%;">
+  <% content_for :head do -%>
+    <% if @registration %>
+      <%= stylesheet_link_tag 'signup.css' %>
+    <% else %>
+      <%= stylesheet_link_tag 'login.css' %>
+    <% end %>
+    <%= stylesheet_link_tag 'cupertino/jquery-ui-1.8.12.custom' %>
+  <% end %>
+
+  <% content_for :bottom do -%>
+    <%= javascript_include_tag 'jquery.datePicker-2.1.2', 'datePickerInitialize' %>
+  <% end %>
+  <% if @user_session.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_session.errors.count, "error") %> prohibited you from logging in:</h2>
+
+      <ul>
+      <% @user_session.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class='error'>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div id='login-wrapper' class='hadean-login'>
+    <div id='login' class='hadean-login four large-4 offset-by-one'>
+
+      <%= form_for  @user_session, :as => :user_session,
+                    :url => admin_sessions_path,
+                    :html => {:class => 'span-12 custom'} do |form| %>
+        <h3>Log in.</h3>
+        <fieldset>
+           <ol id='login_form'>
+
+                <li>
+                    <%=form.label :email, 'Email' %>
+                    <%= form.email_field :email, :autocomplete => 'off', :autocapitalize => 'off' %>
+                </li>
+
+                <li>
+                    <%=form.label :password, 'Password' %>
+                    <%= form.password_field :password, :autocomplete => 'off', :autocapitalize => 'off' %>
+                </li>
+
+           </ol>
+
+          <%= form.submit "Log In", :class => 'button' %>
+
+        </fieldset>
+      <% end %>
+      
+    </div>
+
+  </div>
+</div>

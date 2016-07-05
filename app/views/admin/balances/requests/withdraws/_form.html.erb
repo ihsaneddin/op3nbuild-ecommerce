@@ -1,0 +1,47 @@
+<%= nested_form_for withdraw, :url  => admin_balances_requests_withdraws_path,
+                          :html => {:class => ''}  do |form| %>
+  <% if withdraw.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(withdraw.errors.count, "error") %> prohibited this withdraw request from being saved:</h2>
+
+      <ul>
+      <% withdraw.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div id='withdraw-details' class=' last  line_item_yellow'>
+    <fieldset id="admin-product-general-info" class='four column' style='margin-right:25px'>
+      <legend> Enter the amount you want to withdraw </legend>
+      <div class='clear'></div>
+      <div class='span-3'>
+        <%= form.label :amount %>
+      </div>
+      <div class='span-6 last'>
+        <%= form.number_field :amount %>
+      </div>
+      <div class="clear"></div>
+      <div class='span-3'>
+        <%= form.label :account_number %>
+      </div>
+      <div class='span-6 last'>
+        <%= form.text_field :account_number %>
+      </div>
+      <div class="clear"></div>
+      <div class='span-3'>
+        <%= form.label :bank %>
+      </div>
+      <div class='span-6 last'>
+        <%= form.text_field :bank %>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <%= form.submit 'Create', class: 'button' %>
+      <%= link_to 'Back', admin_balances_requests_withdraws_path, :class => 'button' %>
+    </div>
+  </div>
+
+<% end %>

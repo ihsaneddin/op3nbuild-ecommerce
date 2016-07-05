@@ -1,0 +1,45 @@
+<div id="footer-img">
+  <div class="jumbotron-footer">
+    <%= image_tag 'openbuild/bg-img.jpg', width:'100%'%>
+  </div>
+</div>
+
+<div id="footer" class="text-center">
+  <div class="row"><br>
+    <a> &copy 2016 </a>
+    <span class="span-footer"><b>.</b></span>
+    <a href="<%= terms_path %>"> Terms & Conditions </a>
+    <span class="span-footer"><b>.</b></span>
+    <a href="/faq"> FAQ </a>
+    <span class="span-footer"><b>.</b></span>
+    <a href="/faq"> Advertisers </a>
+    <span class="span-footer"><b>.</b></span>
+    <a href="<%= about_path %>"> About Us </a>
+    <span class="span-footer"><b>.</b></span>
+    <a href="/privacy"> Privacy </a>
+    <span class="span-footer"><b>.</b></span>
+    <a> Find us on </a>
+    <a href="https://www.facebook.com/openbuild.co/" class="a-footer"><i class="fa fa-facebook i-footer " style="margin: 0 10px;"></i></a>
+    <a href="#" class="a-footer"><i class="fa fa-twitter i-footer" style="margin: 0 10px;"></i></a>
+    <a href="#" class="a-footer"><i class="fa fa-pinterest i-footer" style="margin: 0 10px;"></i></a>
+    <a href="#" class="a-footer"><i class="fa fa-fa fa-google-plus i-footer" style="margin: 0 10px;"></i></a>
+  </div>
+</div>
+
+<%#
+loop_footer_tabs = {
+  'Terms & Conditions'  => terms_path,
+  'About'               => about_path#,
+  #'Customer Service'    => faq_customer_service_path
+}
+%>
+
+<!-- <div id="footer_wrapper" class='row'>
+  <div  class='nine large-9 columns'>
+    <ul id='main-footer-tabs' class='inline-list'>
+      <%# loop_footer_tabs.each_pair do |tab_name, tab_path| %>
+        <li> <%#= link_to_unless_current tab_name, tab_path %> </li>
+      <%# end %>
+    </ul>
+  </div>
+</div> -->

@@ -1,0 +1,8 @@
+<% if @comments.present? %>
+	$('div.comments-container').append("<%= escape_javascript( render(partial: 'admin/balances/shared/comments/comment', collection: @comments) ) %>");
+	<% if last_page? @comments %>
+		$(".comments-next-page").remove();
+	<% else %>	
+		$(".comments-next-page").html("<%= escape_javascript( link_to('Load more..', send("admin_balances_#{commentable.class.name.demodulize.downcase}_comments_path", commentable, { page: @comments.next_page, per_page: pagination_rows }), remote: true) ) %>")
+	<% end %>
+<% end %>

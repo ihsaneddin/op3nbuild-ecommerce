@@ -1,0 +1,14 @@
+en:
+  notifications:
+    withdraw:
+      after_create:
+        subject:
+          default: "%{sender} has submitted withdraw request"
+      after_update:
+        subject:
+          default: "%{sender} has updated this withdraw request"
+          notifiable_attributes:
+            state: 
+              rejected: "%{sender} has rejected your withdraw request"
+              canceled: "%{sender} has canceled this withdraw request"
+              succeed: "%{sender} has approved your withdraw request"

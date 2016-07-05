@@ -1,0 +1,14 @@
+en:
+  notifications:
+    refund:
+      after_create:
+        subject:
+          default: "%{sender} has submitted refund request"
+      after_update:
+        subject:
+          default: "%{sender} has updated this refund request"
+          notifiable_attributes:
+            state: 
+              rejected: "%{sender} has rejected your refund request"
+              canceled: "%{sender} has canceled this refund request"
+              succeed: "%{sender} has approved your refund request"

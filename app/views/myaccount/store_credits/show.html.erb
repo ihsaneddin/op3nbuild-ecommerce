@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="caption" align="center">
+		  <h3><b><%= current_user.name %> Store Credits</b></h3>
+
+		  <p id='users-credits' class=''>
+		      You currently have <b><%= number_to_currency @store_credit.amount %></b> worth of credits.
+		  </p>
+		</div>
+	</div>
+</div>

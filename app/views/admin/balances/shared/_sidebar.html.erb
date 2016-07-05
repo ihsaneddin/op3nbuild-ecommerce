@@ -1,0 +1,21 @@
+<% content_for :sidemenu do %>
+  <div class='admin_filters' style='text-align:center'>
+    <h3>
+      Your Credit
+      <strong><%= number_to_currency  balance.amount %></strong>
+
+    </h3>
+    <% if balance_owner.super_admin? %>
+      <strong>
+        <p> Holding Credit <%= number_to_currency balance.hold_credit_amount %> </p>
+        <p> Actual Credit <%= number_to_currency balance.actual_credit_amount %></p>
+      </strong>
+    <% else %>
+      <strong>
+        <p> Pending Withdraw <%= number_to_currency balance.sum_of_pending_withdraws %> </p>
+      </strong>
+      <%= link_to "Withdraw", new_admin_balances_requests_withdraw_path, class: 'button red-button'  if balance.can_be_withdrew?%>
+    <% end %>
+    <div class='clearfix'></div>
+  </div>
+<% end %>

@@ -1,0 +1,28 @@
+<% if current_user %>
+  <ul class="right">
+    <li class="has-dropdown">
+      <%= link_to myaccount_notifications_path do %>
+        <i class="fa fa-bell"></i>
+        <% unless unread_notifications.blank? %>
+          <span class='round alert label' id="notifications-count"><%= unread_notifications.count %></span>
+        <% end %>
+      <% end %>
+      <% unless unread_notifications.blank? %>
+        <ul class="dropdown">
+          <% unread_notifications.each do |notif| %>
+            <li class="unread-notification unread-notification-active" data-read="<%= myaccount_notification_path(notif, { authenticity_token: form_authenticity_token, notification_receipt: { read: 1 } }) %>">
+              <%= link_to notif.notification_receipt_for(current_user).try(:route) do  %>
+                <%= notif.subject %>
+                <br>
+                <small>
+                  <%= I18n.localize(notif.created_at, format: :us_time) %>
+                </small>
+              <% end %>
+            </li>
+            <li class="divider"></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>
+  </ul>
+<% end %>

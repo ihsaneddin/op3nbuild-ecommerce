@@ -1,0 +1,27 @@
+<%= render partial: '/admin/merchandise/sub_header'%>
+
+<h2> <%= @product.name %> </h2>
+
+<%= form_for @product, url:  admin_merchandise_multi_product_variant_path(@product),
+                       html: { class: 'small-6 medium-6 large-6 large-offset-3 columns' }  do |form| %>
+  <div class='row' align="center">
+    <%= render :partial => '/admin/merchandise/multi/variants/form', locals: { form: form }%>
+  </div>
+  <div class='clearfix'></div>
+
+  <div class="container row" align="center">
+  <div class=" generic_submit_button">
+    <%= link_to("New Variant", "javascript:void(0);", class: "add_variant_child button", "data-association" => :variants) %>
+    <%= submit_tag "Update",
+                    class:  "button",
+                    id:     "update_product_button" %>
+    <%= link_to 'Back to Product',     admin_merchandise_product_path(@product), class: 'button' %>
+  </div>
+  </div>
+<% end %>
+
+
+
+<% content_for :bottom do -%>
+  <%= javascript_include_tag 'admin/edit_variants' %>
+<% end %>

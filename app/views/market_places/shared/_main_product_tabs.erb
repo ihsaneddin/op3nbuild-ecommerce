@@ -1,0 +1,9 @@
+<ul id='main-product-type-tabs'>
+  <% product_types.each do |pt_tab| %>
+    <li> <%= link_to_unless_current pt_tab.name, market_places_products_path(:product_type_id => pt_tab.id, contractor: current_contractor.slug) %> </li>
+  <% end %>
+</ul>
+
+<ul id='main-myaccount-tabs'>
+    <li class='shopping_tab'>       <%= link_to_unless_current 'My Account', myaccount_overview_path if most_likely_user %> </li>
+</ul>

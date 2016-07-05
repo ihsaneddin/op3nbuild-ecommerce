@@ -1,0 +1,68 @@
+<%= render partial: 'admin/balances/shared/sidebar' %>
+
+<div class='row' style='text-align: left;'>
+  <p id="notice"><%= notice %></p>
+
+  <div class='four column'>
+    <h3>Withdraw Request Details</h3>
+
+    <ul  class='vertical-list width-list'>
+      <li>
+        <label class=''>Requested by:</label>
+        <span class=''><%= @withdraw.transaksi.balance.user.display_name %></span>
+      </li>
+      <li>
+        <label class=''>Requested at:</label>
+        <span class=''><%=l @withdraw.created_at, :format => :us_time %></span>
+      </li>
+      <li style='clear:both;'>
+        <label class=''>Amount #:</label>
+        <span class=''><%= number_to_currency @withdraw.amount %></span>
+      </li>
+      <li>
+        <label class=''>Account Number:</label>
+        <span class=''><%= @withdraw.bank_account.account_number %></span>
+      </li>
+      <li>
+        <label class=''>Bank:</label>
+        <span class=''><%= @withdraw.bank_account.bank %></span>
+      </li>
+      <li>
+        <label class=''>Status:</label>
+        <span class=''><%= @withdraw.state %></span>
+      </li>
+      <% if @withdraw.messages.present? %>
+        <li>
+          <label>Messages:</label>
+          <% @withdraw.messages.each do |message| %>
+              <span class=''><%= message.content %></span>
+          <% end %>
+        </li>
+      <% end %>
+
+      <li></li>
+    </ul>
+    <h4>
+      <%= link_to 'Approve', approve_admin_balances_requests_withdraw_path(@withdraw.transaksi), :class => 'button small red-button', method: :put, data: {confirm: "Are you sure?"} if can?(:approve, @withdraw) && @withdraw.may_approve? %>
+      <%= link_to 'Cancel', '#', :class => 'button small blue-button toggle-element', data: {toggle: "#message-canceled-for-#{@withdraw.class.name.demodulize.downcase}"} if can?(:cancel, @withdraw) && @withdraw.may_cancel?%>
+      <%= link_to 'Reject', '#', :class => 'button small blue-button toggle-element', data: {toggle: "#message-rejected-for-#{@withdraw.class.name.demodulize.downcase}"} if can?(:reject, @withdraw) && @withdraw.may_reject?%>      
+    </h4>
+
+    <%= render partial: 'admin/balances/shared/message_form', locals: {context: @withdraw, message_url: reject_admin_balances_requests_withdraw_path(@withdraw.transaksi), proposed_state: 'rejected' } if can?(:reject, @withdraw) && @withdraw.may_reject? %>
+
+    <%= render partial: 'admin/balances/shared/message_form', locals: {context: @withdraw, message_url: cancel_admin_balances_requests_withdraw_path(@withdraw.transaksi), proposed_state: 'canceled' } if can?(:cancel, @withdraw) && @withdraw.may_cancel? %>
+
+
+  </div>
+
+  <%= link_to 'Back', admin_balances_requests_withdraws_path(), :class => 'button small' %>
+</div>
+
+<h4> Responses </h4>
+
+<%= render partial: 'admin/balances/shared/comments/comments_list', locals: {commentable: @withdraw, comments: comments_for(@withdraw).paginate(:page => pagination_page, :per_page => pagination_rows)} %>
+
+<br>
+<div class="">
+  <%= render partial: 'admin/balances/comments/form', locals: {commentable: @withdraw} %>
+</div>

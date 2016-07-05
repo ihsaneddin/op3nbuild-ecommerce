@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3" align="center">
+      <h3><b>Addresses</b></h3>
+      <% if @addresses.empty? %>
+        <p>
+          <%= I18n.t(:no_addresses_saved) %>
+        </p>
+      <% else %>
+ <!--       <table class="table"> -->
+          <% for address in @addresses %>
+  <!--          <tr><td> -->
+              <%= render :partial => '/shared/compact_address', :locals => { :shopping_address => address } %>
+              <%= link_to "Edit", edit_myaccount_address_path(address), class: 'btn btn-primary' %> &nbsp;
+              <%= link_to "Remove", myaccount_address_path(address), :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger' %> <br><br>
+  <!--          </tr> -->
+          <% end %>
+  <!--      </table> -->
+      <% end %>
+      
+      <p><%= link_to "New Address", new_myaccount_address_path, :class => 'btn btn-default' %></p>
+    </div>
+  </div>
+</div>

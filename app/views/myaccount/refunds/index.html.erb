@@ -1,0 +1,51 @@
+<% if @refunds.blank? %>
+  <div class="container">
+    <div class="row">
+      <div class="caption" align="center">
+        <h3>Refunds</h3>
+        You currently do not have any refunds request.
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="dropdown">
+      <a id="dLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><font color="grey"><b> YOUR REFUND REQUEST </b></font>
+        <span class="caret"></span>
+      </a>
+      <%= link_to "Create Refund", new_myaccount_refund_path, class: 'button red-button' %>
+      <!-- <ul class="dropdown-menu" aria-labelledby="dLabel">
+        Order 1
+      </ul> -->
+    </div><br>
+    <div class="row">
+      <table class="table table-hover">
+        <tr>
+          <th width="15%">ORDER NO</th>
+          <th width="10%">AMOUNT</th>
+          <th width="10%">STATUS</th>
+          <th width="10%">CREATED AT</th>
+          <th width="10%">&nbsp</th>
+        </tr>
+        <% @refunds.each do |refund| %>
+          <tr>
+            <td>
+              <%= link_to refund.invoice.order.number, myaccount_order_path(refund.invoice.order) %>
+            </td>
+            <td><%= number_to_currency( refund.amount ) %></td>
+            <td><%= refund.state %></td>
+            <td><%= I18n.localize(refund.created_at, :format => :us_time) %></td>
+            <td>
+              <%= link_to "Show", myaccount_refund_path(refund) %>
+              <%= link_to "Cancel", cancel_myaccount_refund_path(refund), data: {confirm: "Are you sure?"}, method: :put if refund.may_cancel? %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+ </div>
+</div>

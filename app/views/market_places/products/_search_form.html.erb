@@ -1,0 +1,21 @@
+<div class="row">
+  <div class='filters'>
+    <%= form_tag market_places_products_path, :method => 'get', :id => "products_search" do %>
+      <label>Name</label>
+      <%= text_field_tag :name, params[:name] %>
+
+      <label>Product Type</label>
+      <%= select_tag "product_type_id", options_from_collection_for_select(product_types, "id", "name"), :include_blank => true %>
+
+      <div style="text-align:center; margin-top: 15px">
+        <%= submit_tag "Search", :name => nil, :class => 'button red-button' %>
+      </div>
+      </p>
+      <div id="order_hidden">
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+      </div>
+    <% end %>
+    <div class='clearfix'></div>
+  </div>
+</div>

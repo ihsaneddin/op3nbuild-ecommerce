@@ -1,0 +1,65 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'products_page.css' %>
+<% end %>
+
+  <%= render 'search_form' %>
+
+<div class="row">
+  <div class="col-sm-7 col-sm-offset-1">
+    <div class="dropdown">
+      <a id="dLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><font color="grey"><b> FEATURED PRODUCTS </b></font>
+        <span class="caret"></span>
+      </a>
+    </div>
+  </div>
+</div><br>
+<div class="row">
+  <% if @products.blank?  %>
+    <div class="caption" align="center">
+      <b>Product is empty or not found</b>
+    </div>
+  <% else %>
+    <% @products.each_with_index do |product, i| %>
+      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 <%= 'col-lg-offset-1 col-md-offset-1' if i == 0 || i == 5 || i == 10 || i == 15 %>">
+          <div class="thumbnail" align="center">
+             <div class="image-hover">
+
+              <div class="img-fix">
+                <%= link_to property_of_contractor_path(product), title: product.name do %>
+                  <% if product.hero_variant.low_stock? %>
+                      <%= image_tag("ribbons/#{product.hero_variant.stock_status}.png", class: "ribbon") %>
+                    <% end %>
+
+              <img src="<%= product.featured_image %>" class="img-rounded" width="150" height="140">
+              
+              <span><i class="fa fa-plus fa-6"></i></span>
+              
+              </div>
+            </div>
+
+
+
+            <div class="caption">
+              <%= product.name.upcase %><br>
+              <b><%= number_to_currency product.price_range.first %>
+              <% if product.price_range? %>
+                  to
+                  <%= number_to_currency product.price_range.last %>
+              <% end %></b>
+              <p align="center"><br><%= link_to 'BUY', property_of_contractor_path(product), class: 'btn btn-block btn-success btn-square', role:'button' %></p>
+            </div>
+          <% end %>
+          </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+<div class="row">
+  <center>
+    <%= will_paginate @products %>
+  </center>
+</div>
+
+<br><br>

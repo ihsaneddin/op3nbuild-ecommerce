@@ -1,0 +1,18 @@
+<div class=' pretty_table'>
+    <% if comments.blank? %>
+      <hr/>
+      <center>
+        No response yet
+      </center>
+      <hr/>
+    <% end %>
+    <div class="comments-container">
+      <%= render partial: 'admin/balances/shared/comments/comment', collection: comments %>
+    </div>
+</div>
+
+<% unless last_page? comments %>
+  <center class="comments-next-page">
+    <%= link_to 'Load more..', send("myaccount_#{commentable.class.name.demodulize.downcase}_comments_path", commentable, { page: comments.next_page, per_page: pagination_rows }), :class => '', remote: true %><br\>
+  </center>
+<% end %>

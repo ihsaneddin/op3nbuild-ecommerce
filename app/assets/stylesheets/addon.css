@@ -1,0 +1,323 @@
+/*Image Footer Area*/
+#footer-img {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    max-height: 175px;
+    padding: 0;
+    margin: 0;
+    top: 10px;
+}
+
+/*Footer Text Link Area*/
+#footer {
+    height: 72px;
+    margin-top: 10px;
+    font-size: 1.2em;
+    background-color: #000000;
+    color: #FFF;
+    position: relative;
+    width: 100%;
+}
+
+.text-center, .column, .form-centered, div.job_return_links {
+    text-align: center;
+}
+.text-center a {
+	color: #ffffff;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+.text-center a:hover {
+	color: #009900;
+	text-decoration: none;
+}
+
+/*Button*/
+.btn-mini {
+	font-size: 15px;
+}
+
+.btn-product {
+	padding: 3px 5px !important;
+  margin-top: 11px !important;
+  color: white !important;
+}
+
+.btn-product:hover {
+	color: grey !important;
+	border: 0;
+	margin-top: 12px !important;
+}
+
+/*Jumbtron Image Text*/
+.jumbotron-static {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    max-height: 185px;
+    padding: 0;
+    top: -20px;
+}
+
+.jumbotron-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	font-size: 18px;
+}
+.jumbotron-text .title,
+.jumbotron-text .sub-title {
+	display: block;
+	margin-bottom: 20px;
+}
+.jumbotron-text .title {
+	padding-top: 20px; 
+}
+.jumbotron-text .orange {
+	color: #ff9900;
+}
+
+.jumbotron-text .white {
+	color: #FFF;
+}
+
+.jumbotron-text .large {
+	font-size: 23px;
+}
+
+.jumbotron-text .small {
+	font-size: 18px;
+}
+
+@media (max-width: 520px) {
+	#footer {
+    font-size: 0.8em;
+	}
+}
+
+@media (max-width: 550px) {
+	.jumbotron-text {
+		height: 95px;
+	}
+	.jumbtron-static {
+		width: 100% !important;
+		max-height: 180px;
+		overflow: hidden;
+	}
+	.jumbotron-text .large {
+		font-size: 15px;
+	}
+	.jumbotron-text .small {
+		font-size: 9px;
+	}
+	.jumbotron-text .title {
+		padding-top: 7px; 
+		margin-bottom: 0px;
+	}
+	.jumbotron-text .sub-title {
+		margin-top: 0px; 
+		margin-bottom: 2px;
+	}
+	.btn-mini {
+		font-size: 8px;
+	}
+}
+
+@media (max-width: 768px) and (min-width: 551px) {
+	.jumbotron-text {
+		height: 85px;
+	}
+	.jumbtron-static {
+		width: 100% !important;
+		max-height: 150px;
+		overflow: hidden;
+	}
+	.jumbotron-text .large {
+		font-size: 20px;
+	}
+	.jumbotron-text .small {
+		font-size: 13px;
+	}
+	.jumbotron-text .title {
+		padding-top: 10px;
+		margin-bottom: 5px; 
+	}
+	.jumbotron-text .sub-title {
+		margin-top: 12px; 
+	}
+	.btn-mini {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 992px) and (min-width: 769px) {
+	.jumbotron-text {
+		height: 85px;
+	}
+	.jumbtron-static {
+		width: 100% !important;
+		max-height: 150px;
+		overflow: hidden;
+	}
+	.jumbotron-text .large {
+		font-size: 20px;
+	}
+	.jumbotron-text .small {
+		font-size: 13px;
+	}
+	.jumbotron-text .title {
+		padding-top: 12px;
+		margin-bottom:  10px;
+	}
+	.jumbotron-text .sub-title {
+		margin-top: 12px; 
+	}
+	.btn-mini {
+		font-size: 13px;
+	}
+}
+
+
+/* Thumbnail Image*/
+.thumbnail,
+.thumbnail img {
+	border: 0;
+}
+
+.thumbnail a>img {
+    display: block;
+    max-width: 100%;
+    height: 140px !important;
+    
+}
+
+
+/*Image Hover Desain*/
+.image-hovera {
+	position: relative;
+	width: 100%;
+	height: 125px;
+	overflow: hidden;
+}
+
+.image-hovera span {
+  	position: absolute;
+  	background: rgba(0,102,204,.5);
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	display: none;
+ }
+
+ .image-hovera:hover span {
+ 	display: block;
+ 	text-align: center;
+ }
+ .image-hovera span i {
+ 	position: relative;
+ 	margin-top: 33%;
+ 	font-size: 30px;
+ 	color: #FFF;
+ }
+
+/*Image Hover Desain2*/
+.image-hover {
+	position: relative;
+	width: 150px !important;
+	height: 140px !important;
+	overflow: hidden;
+}
+.image-hover span {
+  	position: absolute;
+  	background: rgba(0,102,204,.5);
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	display: none;
+ }
+
+ .image-hover:hover span {
+ 	display: block;
+ 	text-align: center;
+ }
+ .image-hover span i {
+ 	position: relative;
+ 	margin-top: 35%;
+ 	font-size: 30px;
+ 	color: #FFF;
+ }
+
+ .btn-square {
+ 	border-radius: 2px;
+  width: 150px !important;
+ }
+
+ /*Span Class Footer*/
+.span-footer {
+	position: absolute;
+	top: -5px;
+	margin-left: -5px;
+	color: white;
+}
+
+.navbar {
+    color: #FFFFFF;
+    background-color: #FFFFFF;
+}
+
+.img-fix {
+	position: relative;
+}
+
+
+.ribbon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-bottom: -90px;
+  width: 61px !important;
+  max-height: 60px;
+}
+
+.topmin20 {
+	margin-top: -20px;
+}
+.btm20 {
+	margin-bottom: 20px;
+}
+.navbar-nav li.dropdown a {
+	color: #000000 !important;
+}
+.navbar-nav li.dropdown a:hover,
+.navbar-nav li.dropdown a:active,
+.navbar-nav li.dropdown a:focus,
+.navbar-nav li.dropdown a:active, 
+.navbar-nav li.dropdown a:visited, 
+.navbar-nav li.dropdown a:hover,
+.navbar-nav li.dropdown a:focus {
+	background-color: #808080 !important;
+}
+.textbold {
+	font-weight: bold !important;
+}
+.divider {
+	border-top: solid 1px #1a1a1a;
+	clear: both;
+}
+a > span.alert {
+	background-color: #f04124;
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 5px !important;
+    height: 5px !important;
+    padding: 5px 10px 5px 10px;
+}

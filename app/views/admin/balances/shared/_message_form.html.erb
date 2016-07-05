@@ -1,0 +1,21 @@
+<%= nested_form_for context.messages.new, :url  => message_url, method: :put,
+                          :html => {id: "message-#{proposed_state}-for-#{context.class.name.demodulize.downcase}", :class => 'message-form', style: "display: none;"}  do |form| %>
+
+  <div id='message-details' class=' last  line_item_yellow'>
+    <fieldset id="admin-product-general-info" class='four column' style='margin-right:25px'>
+      <legend> Provide the contractor the reason why the request is being <%= proposed_state %> </legend>
+      <div class='span-3'>
+        <%= form.label :content %>
+      </div>
+      <div class='span-6 last'>
+        <%= form.text_area :content %>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <%= form.submit 'Submit', class: 'button small' %>
+      <%= link_to 'Cancel', "#", :class => 'button cancel-message toggle-element small', data: { toggle: "#message-#{proposed_state}-for-#{context.class.name.demodulize.downcase}" } %>
+    </div>
+  </div>
+
+<% end %>

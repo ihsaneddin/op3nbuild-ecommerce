@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3" align="center">
+		  <h3><b>Edit Address</b></h3>
+
+		  <%= form_for(@form_address, :url => myaccount_address_path(@form_address), html: {class: 'custom'}) do |f| %>
+		    <%= render :partial => 'form', :locals => {:f => f} %>
+		  <% end %>
+		  <div class='columns'>
+		    <%= link_to 'Back to Addresses', myaccount_addresses_path, :class => 'btn btn-default' %>
+		  </div>
+		</div>
+	</div>
+</div>

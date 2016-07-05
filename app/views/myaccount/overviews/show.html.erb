@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3" align="center">
+      <div class="thumbnail">
+        <h4><b><%= current_user.name %> Profile </b></h4>
+        <table class="table">
+          <tr><td width="25%"><b>Email</b></td><td> : </td><td><%= current_user.email %></td></tr>
+        </table>
+          <p><%= link_to "Edit", edit_myaccount_overview_path(), class: 'btn btn-primary ' %></p>
+          
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3" align="center">
+      <div class="thumbnail">
+        <h4><b>Address</b></h4>
+        <% if current_user.shipping_address %>
+          <%= render :partial => '/shared/compact_address', :locals => { :shopping_address => current_user.shipping_address } %>
+          <%= link_to "Edit", edit_myaccount_address_path(current_user.shipping_address), class: 'btn btn-primary' %>
+        <% else %>
+          No Address Saved.<br/><br/>
+          <%= link_to "New", new_myaccount_address_path(), class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3" align="center">
+      <div class="thumbnail">
+        <h4><b>Store Credits</b></h4>
+        <%= number_to_currency current_user.store_credit.amount %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

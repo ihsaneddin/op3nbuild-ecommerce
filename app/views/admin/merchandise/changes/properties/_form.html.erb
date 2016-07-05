@@ -1,0 +1,90 @@
+
+<% if @product.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@product.errors.count, "error") %> prohibited this purchase_order from being saved:</h2>
+
+    <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<fieldset id="admin-product-properties" class='span-14' style='padding-bottom:10px;'>
+  <legend>
+    <%= @product.name %>'s properties
+    <%= f.link_to_add "Add property", :product_properties, :data => { :target => "#product_properties" } %>
+  </legend>
+
+  <div id="product_properties" class='span-14'>
+    <%# @product.product_properties.each do |product_property| %>
+
+        <%= f.fields_for :product_properties do |product_property_form|%>
+          <fieldset>
+            <div class="variant_form left six large-14 last" style='margin-bottom:20px;'>
+              <div id="admin-product-properties" class=' <%= product_property_form.object.new_record? ? 'new_fields' : 'fields' %>  '>
+                <div class='field six large-14 '>
+                  <div style='float:right;'>
+                    <%= product_property_form.link_to_remove "Remove" %>
+                  </div>
+                  <label>Property:</label>
+                  <%= product_property_form.select :property_id, @all_properties, {selected: product_property_form.object.property_id}, class: 'populate-property-units', data: { "units-properties" => @units_properties.to_json } %><br/>
+                  <label>Value:</label>
+                  <%= product_property_form.number_field  :value, { step: 0.5, min: 0, required: true } %><br/>
+                  <label>Value Unit:</label>
+                  <%= product_property_form.select  :unit_value, [], { selected: product_property_form.object.unit_value }, class: 'select-property-unit', data: { selected: product_property_form.object.unit_value } %><br/>
+                  <label>Position:</label>     
+                  <%= product_property_form.number_field  :position, {:step => 1, min: 1, :required => true } %><br/>
+                  <label>Description:</label>
+                  <%= product_property_form.text_area   :description, :required => true %>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        <% end %>
+
+    <%# end %>
+  </div>
+
+</fieldset>
+
+<div class='span-14' style='margin-top:20px;'>
+  <% f.link_to_add "Add property", :product_properties, :data => { :target => "#product_properties" } %>
+</div>
+
+<script type="text/javascript">
+
+  function populateUnitsValue(units, populatePropertyUnit, selectPropertyUnit)
+  {
+    if (selectPropertyUnit.length)
+    {
+      currentPropertyUnits= units[populatePropertyUnit.val()];
+      selectPropertyUnit.empty();
+      $.each(currentPropertyUnits, function(index,option) {
+        selectPropertyUnit.append($("<option></option>")
+           .attr("value", option).text(option));
+      });
+      selectPropertyUnit.val(selectPropertyUnit.attr('data-selected'));
+
+    }
+  }
+
+  $(document).ready(function(e){
+
+    $populatePropertyUnit= $('select.populate-property-units')
+    if ($populatePropertyUnit.length)
+    {
+      var units= JSON.parse(''+$populatePropertyUnit.attr('data-units-properties')+'');
+      
+      $selectPropertyUnit= $populatePropertyUnit.closest('div').find('select.select-property-unit');
+      populateUnitsValue(units, $populatePropertyUnit, $selectPropertyUnit)
+    }
+
+    $(document).on('change', 'select.populate-property-units', function(e){
+      $selectPropertyUnit= $(this).closest('div').find('select.select-property-unit');
+      populateUnitsValue(units, $(this), $selectPropertyUnit) 
+    });
+
+  });
+</script>

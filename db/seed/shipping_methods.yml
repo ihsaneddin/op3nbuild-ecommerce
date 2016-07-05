@@ -1,0 +1,22 @@
+companies:
+  FedEx: 
+    services:
+      - :name: FedEx SameDay
+        :description: Delivery time based on flight availability
+      - :name: FedEx First Overnight
+        :description: Delivery by 8:00 or 8:30 am**
+      - :name: FedEx Priority Overnight
+        :description: Delivery by 10:30 am***
+      - :name: FedEx Standard Overnight
+        :description: Delivery by 3:00 pm***
+      - :name: FedEx 2Day
+        :description: Delivery by 4:30 pm***
+      - :name: FedEx Express Saver
+        :description: Delivery by 4:30 pm***
+      - :name: FedEx Ground
+        :description: Delivery day based on distance to destination
+        :dynamic_cost: true
+      - :name: FedEx Home Delivery
+        :description: Delivery day based on distance to destination
+        :dynamic_cost: true
+

@@ -1,0 +1,82 @@
+<%= render partial: 'admin/balances/shared/sidebar' %>
+
+<div class='row' style='text-align: left;'>
+  <p id="notice"><%= notice %></p>
+
+  <div class='four column'>
+    <h3>Refund Request Details</h3>
+
+    <ul  class='vertical-list width-list'>
+      <li>
+        <label class=''>Order Number</label>
+        <span class=''><%= link_to @refund.invoice.order.number, admin_history_order_path(@refund.invoice.order)%></span>
+      </li>
+      <li>
+        <label class="">Requested By</label>
+        <span class=''><%= link_to @refund.user.display_name, admin_user_datas_user_path(@refund.user) %></span>
+      </li>
+      <li>
+        <label class="">Reason</label>
+        <span class=''><%= @refund.reason %></span>
+      </li>
+      <li>
+        <label class=''>Requested at:</label>
+        <span class=''><%=l @refund.created_at, :format => :us_time %></span>
+      </li>
+      <li style='clear:both;'>
+        <label class=''>Amount #:</label>
+        <span class=''><%= number_to_currency @refund.amount %></span>
+      </li>
+      <li>
+        <label class=''>Account Number:</label>
+        <span class=''><%= @refund.bank_account.account_number %></span>
+      </li>
+      <li>
+        <label class=''>Bank:</label>
+        <span class=''><%= @refund.bank_account.bank %></span>
+      </li>
+      <li>
+        <label class=''>Status:</label>
+        <span class=''><%= @refund.state %></span>
+      </li>
+      <li>
+        <label class="">Reason:</label>
+        <span class=''><%= @refund.reason %></span>
+      </li>
+      <li>
+        <label class="">Note:</label>
+        <span class=''><%= @refund.note %></span>
+      </li>
+      <% if @refund.messages.present? %>
+        <li>
+          <label>Messages:</label>
+          <% @refund.messages.each do |message| %>
+              <span class=''><%= message.content %></span>
+          <% end %>
+        </li>
+      <% end %>
+      <li></li>
+    </ul>
+    <h4>
+      <%= link_to 'Approve', approve_admin_balances_requests_refund_path(@refund.transaksi), :class => 'button small red-button', method: :put, data: {confirm: "Are you sure?"} if can?(:approve, @refund) && @refund.may_approve? %>
+      <%= link_to 'Cancel', '#', :class => 'button small blue-button toggle-element', data: {toggle: "#message-canceled-for-#{@refund.class.name.demodulize.downcase}"} if can?(:cancel, @refund) && @refund.may_cancel?%>
+      <%= link_to 'Reject', '#', :class => 'button small green-button toggle-element', data: {toggle: "#message-rejected-for-#{@refund.class.name.demodulize.downcase}"} if can?(:reject, @refund) && @refund.may_reject? %>      
+    </h4>
+
+    <%= render partial: 'admin/balances/shared/message_form', locals: {context: @refund, message_url: reject_admin_balances_requests_refund_path(@refund.transaksi), proposed_state: 'rejected' } if can?(:reject, @refund) && @refund.may_reject? %>
+
+    <%= render partial: 'admin/balances/shared/message_form', locals: {context: @refund, message_url: cancel_admin_balances_requests_refund_path(@refund.transaksi), proposed_state: 'canceled' } if can?(:cancel, @refund) && @refund.may_cancel? %>
+
+  </div>
+
+  <%= link_to 'Back', admin_balances_requests_refunds_path(), :class => 'button small' %>
+</div>
+
+<h4> Responses </h4>
+
+<%= render partial: 'admin/balances/shared/comments/comments_list', locals: {commentable: @refund, comments: comments_for(@refund).paginate(:page => pagination_page, :per_page => pagination_rows)} %>
+
+<br>
+<div class="">
+  <%= render partial: 'admin/balances/comments/form', locals: {commentable: @refund} %>
+</div>

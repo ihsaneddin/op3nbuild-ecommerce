@@ -1,0 +1,2 @@
+module Openbuild::SessionsHelper
+end

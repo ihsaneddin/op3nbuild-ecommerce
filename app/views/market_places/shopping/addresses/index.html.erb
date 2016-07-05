@@ -1,0 +1,24 @@
+<% if  @shopping_addresses.empty? %>
+  <h2>New Address</h2>
+<% else %>
+  <h3>Pick a Shipping Address</h3>
+<% end %>
+
+<div id='shopping_addresses_selections' class='twelve last'>
+  <% @shopping_addresses.each do |shopping_address| %>
+    <div class='four large-4 columns last box'>
+      <%= render :partial => '/shared/compact_address', :locals => {:shopping_address => shopping_address} %>
+      <%= button_to 'Use', select_address_market_places_shopping_address_path(shopping_address, contractor_context), :class => 'button spade inline-block', :method => :put %>
+      <%= link_to 'Edit', edit_market_places_shopping_address_path(shopping_address, contractor_context) %>
+      <%= link_to 'Delete', market_places_shopping_address_path(shopping_address, contractor_context), :data => {:confirm => 'Are you sure?'}, :method => :delete %>
+    </div>
+    <hr style='color:#aac'/>
+  <% end %>
+  <% if session_order.ready_to_checkout? %>
+    <%= link_to 'Order Summary', market_places_shopping_orders_path(contractor_context), :class => 'button success' %>
+  <% end %>
+</div>
+<br />
+<%= form_for @shopping_address, url: market_places_shopping_addresses_path(contractor_context), html: {class: 'custom'} do |address_form| %>
+  <%= render :partial =>  'form', :locals => {:f => address_form}  %>
+<% end %>

@@ -1,0 +1,7 @@
+en:
+  notifications:
+    comment:
+      commentable:
+        credit: "%{sender} commented on this %{state} credit request"
+        withdraw: "%{sender} commented on this %{state} withdraw request" 
+        refund: "%{sender} commented on this %{state} refund request"

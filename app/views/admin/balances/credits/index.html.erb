@@ -1,0 +1,35 @@
+<%= render partial: 'admin/balances/shared/sidebar' %>
+
+<h3>Credit Requests History</h3>
+
+<div id="admin_credit_page_wrapper">
+  <div id="admin_credit_grid_wrapper" class='column pretty_table'>
+      <table>
+        <thead>
+        <tr class='odd'>
+          <th class='column1_header'><%= sortable "id" %></th>
+          <th>Order No</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Updated at</th>
+          <th></th>
+        </tr>
+        </thead>
+        <% @transactions.each do |trans| %>
+          <tr class='<%= cycle("odd", "")%>'>
+            <td><%= trans.id %></td>
+            <td><%= link_to trans.context.try(:invoice).order.number, admin_document_invoice_path(trans.context.try(:invoice)) %></td>
+            <td><%= number_to_currency trans.context.try(:amount) %></td>
+            <td><%= trans.context.try(:state) %></td>
+            <td><%= I18n.localize(trans.updated_at, :format => :us_time) %></td>
+            <td>
+              <%= link_to 'show', admin_balances_credit_path(trans) %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+    <%= will_paginate @transactions %>
+  </div>
+
+</div>

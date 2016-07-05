@@ -1,0 +1,12 @@
+en:
+  notifications:
+    order:
+      after_create:
+        subject:
+          default: "customer %{sender} has submitted an order."
+      after_update:
+        subject:
+          default: "%{sender} has updated this order."
+          notifiable_attributes:
+            state: 
+              complete: "%{sender} has completed an order."

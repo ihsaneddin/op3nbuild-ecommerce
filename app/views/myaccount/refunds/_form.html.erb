@@ -1,0 +1,85 @@
+<% if refund.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(refund.errors.count, "error") %> prohibited this refund from being saved:</h2>
+    <div>
+      <% refund.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<table class="table">
+
+<form class="form-inline">
+<div class="form-group">
+  <div class='refund'>
+    <div class=" twelve large-12">
+      <tr class="field five columns">
+        <td><%= f.label :order_no, "Order Number" %></td>
+        <td>&nbsp;:&nbsp;</td>
+        <td><%= f.text_field :order_no,  :class => 'form-control' %></td>
+      </tr>    
+      <tr class="field four large-4 columns">
+        <td><%= f.label    :reason, "Refund Reason" %></td>
+        <td>&nbsp;:&nbsp;</td>
+        <td>
+        <div class="dropdown">
+        <%= f.select  :reason, ReturnReason::REASONS, {},
+                      {  :include_blank => true, class: 'btn btn-default btn-block dropdown-toggle' }
+                      %>
+        </div>
+        </td>
+      </tr>
+      <tr class="field four large-4 columns">
+        <td><%= f.label    :account_number, "Bank Account" %></td>
+        <td>&nbsp;:&nbsp;</td>
+        <td>
+          <%= f.text_field :account_number,  :class => 'form-control' %>
+        </td>
+      </tr>
+      <tr class="field four large-4 columns">
+        <td><%= f.label    :bank, "Bank Name" %></td>
+        <td>&nbsp;:&nbsp;</td>
+        <td>
+          <%= f.text_field :bank,  :class => 'form-control' %>
+        </td>
+      </tr>
+      <tr class="field four large-4 columns">
+        <td><%= f.label    :note, "Note" %></td>
+        <td>&nbsp;:&nbsp;</td>
+        <td>
+          <%= f.text_area :note,  :class => 'form-control' %>
+        </td>
+      </tr>
+    </div>
+  </div>
+
+
+  <tr class="actions twelve columns">
+    <td colspan="3"><center><%= f.submit 'Submit', :class => 'btn btn-primary' %></center></td>
+  </tr>
+  <div class='clearfix'></div>
+</div>
+</form>
+</table>
+
+
+<!-- <form class="form-inline">
+  <div class="form-group">
+    <label for="exampleInputName2">First Name</label><input type="text" class="form-control" id="exampleInputName2">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName2">Last Name</label><input type="text" class="form-control" id="exampleInputName2">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName2">Email</label><input type="text" class="form-control" id="exampleInputName2">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName2">Password </label><input type="password" class="form-control" id="exampleInputName2">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName2">Password Confirmation</label><input type="password" class="form-control" id="exampleInputName2">
+  </div>
+  <div class="actions"><%#= f.submit 'Update' , :class => 'btn btn-primary' %>
+  </div>
+</form> -->

@@ -1,0 +1,51 @@
+
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'tables.css' %>
+<% end %>
+
+<div class='nine large-9 columns'>
+  <h3> 
+    Refund Request for Order # <%= @refund.invoice.order.number %>
+    &nbsp<%= link_to "Cancel", cancel_myaccount_refund_path(@refund), method: :put, data: {confirm: 'Are you sure?'} if @refund.may_cancel? %>
+  </h3>
+
+  <div class='pretty_table ten'>
+    <table style='margin: 0;'>
+      <tbody>
+        <tr>
+          <td class='left-align'> Amount: </td><td> <%= number_to_currency( @refund.amount ) %> </td>
+        </tr>
+        <tr>
+          <td class='left-align'> Reason: </td><td> <%= @refund.reason %> </td>
+        </tr>
+        <tr>
+          <td class='left-align'> Note: </td>
+          <td>
+            <%= @refund.note %>
+          </td>
+        </tr>
+        <tr>
+          <td class='left-align'> Status: </td>
+          <td>
+            <%= @refund.state %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h4> Responses </h4>
+
+      <%= render partial: 'myaccount/shared/comments/comments_list', locals: {commentable: @refund, comments: @refund.comments.paginate(:page => pagination_page, :per_page => pagination_rows)} %>
+      
+      <%= render partial: 'myaccount/comments/form', locals: {commentable: @refund} %>
+    </div>
+  </div>
+  </div>
+</div>

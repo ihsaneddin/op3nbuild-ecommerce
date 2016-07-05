@@ -1,0 +1,211 @@
+
+<% content_for :head do -%>
+  <%= javascript_include_tag 'admin/merchandise_product' %>
+<% end %>
+
+
+<% content_for :below_body do -%>
+  <script>
+    Hadean.AdminMerchandiseProductForm.initialize(<%= @product.id %>);
+  </script>
+<% end %>
+
+<div class="row">
+  <%= error_messages_for 'product' %>
+  <fieldset id="admin-product-general-info" class='four column' style='margin-right:25px'>
+    <legend>General Info</legend>
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :name %>
+    </div>
+    <div class='span-6 last'>
+      <%= form.text_field :name %>
+    </div>
+
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :permalink %>
+    </div>
+    <div class='span-6 last'>
+      <%= form.text_field :permalink %>
+    </div>
+
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :set_keywords, 'Search keywords' %><br/> (separate with a comma)
+    </div>
+    <div class='span-6 last'>
+      <%= form.text_field :set_keywords %>
+    </div>
+
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :meta_keywords %>
+    </div>
+    <div class='span-6 last'>
+      <%= form.text_field :meta_keywords %>
+    </div>
+
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :meta_description %>
+    </div>
+    <div class='span-6 last'>
+      <%= form.text_field :meta_description %>
+    </div>
+
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :product_type %>
+    </div>
+    <div class='span-6 last'>
+      <%#= form.select :product_type_id, @select_product_types %>
+      <%= form.select :product_type_id,
+                      nested_set_options(ProductType, ProductType.new) {|i| "#{'-' * i.level} #{i.name}" },
+                      { include_blank: true } %>
+    </div>
+
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :shipping_category %>
+    </div>
+
+    <div class='span-6 last'>
+      <%= form.select :shipping_category_id, @select_shipping_category %>
+    </div>
+
+  <div class='clear'></div>
+    <div class='span-3'>
+      <%= form.label :brand %>
+    </div>
+
+    <div class='span-6 last'>
+      <%= form.select :brand_id, @brands %>
+      <%= link_to "Add", "#", class: 'button tiny', data: {'reveal-id' => 'myModal'} %>
+    </div>
+    <%#s= render :partial => 'admin/merchandise/products/shipping_rates_form'  %>
+  </fieldset>
+</div>
+
+<div class="row">
+  <fieldset class="large-6 column">
+    <legend>Images - <%= add_child_link "New Image", :images %></legend>
+
+    <%= new_child_fields_template form, :images, :form_builder_local => :image_form %>
+
+
+    <div id="product_images" class='span-16'>
+      <% @product.images.each do |image| %>
+        <div id='image_<%= image.id %>' class="variant_form left span-16 last">
+          <%= form.fields_for :images, image do |image_form|%>
+            <%= form.fields_for :images, image do |image_form|%>
+              <fieldset class='<%=  image_form.object.new_record? ? "new_fields" : "fields" %>'>
+                <% if !image_form.object.new_record? %>
+                  <%= image_tag image_form.object.photo.url(:small) %>
+                <% end %>
+                <div style='float:right;'>
+                  <%= remove_child_link('remove', image_form) %>
+                </div>
+                <label>Position</label>
+                <%= image_form.select       :position, [1,2,3,4,5,6] %>
+
+                <label>Caption</label>
+                <%= image_form.text_field   :caption %>
+
+                <label>Photo</label>
+                <%= image_form.file_field   :photo %>
+
+                <label>Link to image</label>
+                <%= image_form.text_field   :photo_from_link %>
+              </fieldset>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </fieldset>
+  <fieldset class="large-6 column">
+    <legend>Properties</legend>
+    <div id='properties_selections' class='four large-4 last'>
+      <%= select_tag 'property[ids][]',
+                      options_from_collection_for_select(@properties, "id", "full_name", @selected),
+                      :class => 'chzn-select  column',
+                      :multiple => 'true',
+                      :style    => 'overflow:scroll; width: 350px',
+                      'data-placeholder' => 'Choose Properties' %>
+    </div>
+  </fieldset>
+</div>
+<div class="row">
+  <fieldset>
+    <legend>Variant - <%= add_child_link "New Variant", :variants %></legend>
+    <%= new_child_fields_template form, :variants, :form_builder_local => :variant_form , locals: { image_groups: @image_groups, product: @product }%>
+    <% @product.variants.each do |variant| %>
+      <div class='span-6 three large-3 column ' >
+        <%= form.fields_for :variants, variant do |ff|%>
+          <table class='span-6 ar-sidebar' style='width:240px;'>
+            <thead>
+              <tr>
+                <th colspan=2> <%= variant.sku %>  </th>
+              </tr>
+            </thead>
+            <tr>
+              <td>SKU   </td><td> <%= ff.text_field :sku,   class: 'span-3' %> </td>
+            </tr><tr>
+              <td>Price </td><td> <%= ff.text_field :price, class: 'span-3' %> </td>
+            </tr><tr>
+              <td>Cost  </td><td> <%= ff.text_field :cost,  class: 'span-3' %> </td>
+            </tr><tr>
+              <td>Name  </td><td> <%= ff.text_field :name,  class: 'span-3' %> </td>
+            </tr><tr>
+              <td>Images  </td><td> <%= ff.select :image_group_id, image_groups,{ include_blank: true, prompt: "Defaults to product's images" } %> </td>
+            </tr>
+            <tr>
+              <td>Inactivate </td><td> <%= ff.check_box :inactivate, class: 'span-3' %> </td>
+            </tr>
+              <% @product.properties.each do |property| %>
+                <tr style='background:#ACF;text-align:center;'> <th colspan=2> <%= property.display_name %> </th> </tr>
+                <% variant_id = variant.id rescue nil %>
+                <% variant_property = property.variant_properties.find_or_initialize_by(variant_id: variant_id) if variant_id %>
+                <% variant_property ||= VariantProperty.new( property_id: property.id ) %>
+                <% variant_property.errors.add(:description, "can't be blank.") unless variant_id %>
+                  <%= ff.fields_for :variant_properties,
+                                   variant_property  do |variant_property_form|%>
+                    <tr>
+                      <td>
+                        Primary? <%= variant_property_form.check_box  :primary %>
+                      </td>
+                      <td >
+                          <%= variant_property_form.hidden_field  :property_id %>
+                          <%= variant_property_form.text_field    :description,  class: 'span-3' %>
+                      </td >
+                    </tr>
+                  <% end %>
+              <% end %>
+
+          </table>
+        <% end %>
+      </div>
+    <% end %>
+  </fieldset>
+</div>
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'chosen.css' %>
+<% end %>
+
+<% content_for :below_body do -%>
+  <%= javascript_include_tag 'chosen/chosen.jquery.min.js' %>
+  <%= javascript_include_tag 'admin/wizards/properties.js' %>
+<% end %>
+
+<%= content_for :modals do -%>
+  <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h3>New Brand</h3>
+    <% @brand = Brand.new %>
+    <%= form_for(@brand, :url => admin_merchandise_brands_path(@brand)) do |f| %>
+      <%= render :partial => 'admin/merchandise/brands/form', :locals => {:f => f} %>
+      <%= f.submit 'Create', :class => 'button' %>
+    <% end %>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+<% end %>

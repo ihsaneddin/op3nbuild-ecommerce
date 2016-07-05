@@ -1,0 +1,18 @@
+# Be sure to restart your server when you modify this file.
+development:
+  openbuild_base_url: http://localhost:3000
+  openbuild_existed_user_url: http://localhost:3000/api/v1/ecommerce_users
+  openbuild_profile_url: http://localhost:3000/users/tokens
+test:
+  openbuild_base_url: http://localhost:3000
+  openbuild_existed_user_url: http://localhost:3000/api/v1/ecommerce_users
+  openbuild_profile_url: http://localhost:3000/users/tokens
+staging:
+  openbuild_base_url: http://159.203.200.230
+  openbuild_existed_user_url: http://159.203.200.230/api/v1/ecommerce_users
+  openbuild_profile_url: http://159.203.200.230/users/tokens
+production:
+  openbuild_base_url: https://openbuild.co
+  openbuild_existed_user_url: https://openbuild.co/api/v1/ecommerce_users
+  openbuild_profile_url: https://openbuild.co/users/tokens
+

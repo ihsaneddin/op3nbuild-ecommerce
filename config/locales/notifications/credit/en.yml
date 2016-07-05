@@ -1,0 +1,13 @@
+en:
+  notifications:
+    credit:
+      after_create:
+        subject:
+          default: "%{sender} has submitted credit request"
+      after_update:
+        subject:
+          default: "%{sender} has updated this credit request"
+          notifiable_attributes:
+            state: 
+              rejected: "%{sender} has rejected your credit request"
+              paid: "%{sender} has approved your credit request"

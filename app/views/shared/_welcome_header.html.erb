@@ -1,0 +1,148 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to root_path do %>
+        <%= image_tag 'openbuild/marketplace.jpg', class: 'site-logo-img',width: '250', height:'32', style:'position: relative; padding: 0; top: 8px;' %>
+      <% end %>
+
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+       
+          <%#= link_to 'POST A PRODUCT', admin_merchandise_products_path, class: 'btn btn-success btn-mini', style:'position: absolute; padding: 0 3px 0 4px; top: 14px; right: 350px;' %>
+        <%# end %>
+        
+        <li> <% unless current_user.nil? || !current_user.admin? %>
+        <%= link_to 'POST A PRODUCT', admin_merchandise_products_path, class: 'btn btn-success btn-product' %>
+        <% end %>
+        </li>
+
+        <%= render 'market_places/shared/notif_header' %>
+        
+        <li class="dropdown">
+
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#"><i class="fa fa-shopping-cart"></i> Your Cart <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% if !session_cart.empty?%>
+              <li>
+                <a class="textbold">ITEMS</a>
+              </li>
+              <% session_cart.each do |cart| %>
+
+                  <%#= link_to( 'contractor',  market_places_shopping_cart_items_path(contractor: cart.contractor.slug)) %>
+                  
+                  <li class="divider"<%#= unless !cart.shopping_cart_items.nil? %> role="separator"></li>
+                  <!-- <ul class="dropdown"> -->
+                    <% cart.shopping_cart_items.each do |item| %>
+                      <li>
+                        <%= link_to(market_places_shopping_cart_items_path(contractor: cart.contractor.slug), :id => 'cart_items_buttons') do %>
+                           <%= item.name %>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  <!-- </ul> -->
+                </li>
+              <% end %>
+            <% else %>
+              <li>
+                <%= link_to( 'Your cart is Empty!', shopping_cart_items_path) %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+        
+
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Your Account <span class="caret"></span></a>
+          <% unless current_user.nil? %>
+          <ul class="dropdown-menu">
+
+            <% unless current_user %>
+              <li><% link_to 'Login',  login_path %></li>
+            <% else %>
+              <% if current_user.admin? %>
+                <li><%= link_to 'Admin', admin_path %></li>
+                <li class="divider"></li>
+              <% end %>
+              
+              <li>
+                <%= link_to myaccount_overview_path do %>
+                  Account
+                <% end %>
+              </li>
+              <li><%= link_to raw('Orders &rarr;' ), myaccount_orders_path %></li>
+              <li><%= link_to raw('Refunds &rarr;' ), myaccount_refunds_path %></li>
+              <li><%= link_to 'Addresses', myaccount_addresses_path %></li>
+              <li><%= link_to 'Credit Cards', myaccount_credit_cards_path %></li>
+              <li><%= link_to 'Credits', myaccount_store_credit_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Openbuild', 'openbuild.co' %></li>
+              <li><%= link_to(raw("Logout " +("<i class='fa fa-sign-out'></i>")), logout_path, method: :delete) %></li>
+            <% end %>
+          </ul>
+          <% end %>
+
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+
+
+<% unless !current_user.nil? %>
+  <div class="jumbotron jumbotron-static">
+    <div class="jumbtron-static">
+      <%= image_tag 'openbuild/bg.jpg', width:'100%'%>
+    </div>
+    <div class="jumbotron-text" align="center">
+      <div class="title">
+        <span class="orange large"><br><b> BROWSE </b></span>
+        <span class="white large"><b> CUSTOM MADE PRODUCTS </b></span>
+      </div>
+      <div class="sub-title">
+        <span class="white small"><b>BUY GOODS CRAFTED BY OUR USERS</b></span>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% unless current_user.nil? %>
+  <div class="jumbotron jumbotron-static">
+    <div class="jumbtron-static">
+      <% if controller_name == "welcome" && action_name == "index"%>
+        <%= image_tag 'openbuild/bg.jpg', width:'100%'%>
+      <% end %>
+    </div>
+    <div class="jumbotron-text" align="center">
+      <% if current_user.roles.blank? %>
+        <div class="title">
+          <span class="orange large"><br><b> BROWSE </b></span>
+          <span class="white large"><b> CUSTOM MADE PRODUCTS </b></span>
+        </div>
+        <div class="sub-title">
+          <span class="white small"><b>BUY GOODS CRAFTED BY OUR USERS</b></span>
+        </div>
+      <%else%>
+        <div class="title">
+          <span class="orange large"><br><b> CREATE IT. </b></span>
+          <span class="white large"><b> SELL IT. </b></span>
+        </div>
+        <div class="sub-title">
+          <span class="white small"><b>POST CUSTOM MADE PRODUCTS FOR SALE</b></span>
+        </div>
+      <%end%>
+    </div>
+  </div>
+<% end %>

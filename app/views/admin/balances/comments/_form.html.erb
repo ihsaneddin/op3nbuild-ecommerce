@@ -1,0 +1,11 @@
+
+<%= nested_form_for commentable.comments.new, :url  => send("#{params[:controller].gsub('/','_').singularize}_comments_path", commentable),
+                          :html => {:class => ''}  do |f| %>
+	<div class="field">
+	  <%= f.text_area :note %>
+	</div>
+
+	<div class="actions">
+	  <%= f.submit "Add Comment", :class => 'comment-submit-button button small' %>
+	</div>
+<% end %>

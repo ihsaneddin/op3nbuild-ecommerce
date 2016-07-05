@@ -1,0 +1,128 @@
+.top-bar {
+    background: white !important;
+}
+
+hr {
+    height: 12px;
+    border: 0;
+    margin: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+.top-bar-section li:not(.has-form) > .dropdown > li a:not(.button) {
+    line-height: 30px;
+}
+
+.top-bar-section li a:not(.button) {
+    background: white !important;
+    color: black !important;
+}
+
+.top-bar-section li a:not(.button):hover {
+    background: gray !important;   
+}
+
+.top-bar-section ul li.active > a {
+    background: gray !important;   
+}
+
+.top-bar-section ul li.active > a:hover {
+    background: yellow !important;   
+}
+
+#footer {
+    height: 80px;
+    margin-top: 10px;
+    font-size: 1.1em;
+    background-color: #000000;
+    color: #FFF;
+    position: relative;
+    max-width: 100%;
+}
+#footer-img {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    max-height: 175px;
+    padding: 0;
+    margin: 0;
+    top: 10px;
+}
+.text-center, .column, .form-centered, div.job_return_links {
+    text-align: center;
+}
+.text-center a {
+	color: #ffffff;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+.text-center a:hover {
+	color: #009900;
+	text-decoration: none;
+
+}
+.span-footer {
+	position: relative;
+	top: -5px;
+	margin-left: -3px;
+}
+
+/* Something Responsive Footer */
+
+@media (max-width: 768px) and (min-width: 551px) {
+	#footer {
+    	font-size: 0.9em;
+	}
+    #footer-img {
+        max-height: 130px;
+    }
+
+}
+
+@media (max-width: 550px) and (min-width: 521px) {
+	#footer {
+    	font-size: 0.9em;
+	}
+    #footer-img {
+        max-height: 110px;
+    }
+
+}
+@media (max-width: 520px) {
+	#footer {
+    font-size: 0.7em;
+	}
+    #footer-img {
+        max-height: 72px;
+    }
+
+
+}
+.pika-stage {
+    margin-left: 18px;
+    max-height: 350px;
+}
+
+/* Unmatched */
+input:required {
+    /*background:hsl(180, 50%, 90%);*/
+    border:1px solid #999;
+}
+input:optional {
+    /*background:hsl(300, 50%, 90%);*/
+    border:1px dotted hsl(180, 50%, 90%);
+}
+input:valid,
+input:in-range {
+    /*background:hsl(120, 50%, 90%);*/
+    border-color:hsl(120, 50%, 50%);
+}
+
+input:invalid,
+input:out-of-range {
+    border-color:hsl(0, 50%, 50%);
+    /*background:hsl(0, 50%, 90%);*/
+}
+

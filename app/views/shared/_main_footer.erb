@@ -1,0 +1,57 @@
+<div class="container-fluid" id="image-footern">
+  <div class="row">
+    <div id="footer-img">
+      <div class="jumbotron-footer">
+        <% unless current_user.blank? %>
+          <%= image_tag 'openbuild/bg-img.jpg', width:'100%' unless current_user.roles.blank? %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="text-center">
+  <div class="container">
+    <div class="row"><br>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <a> &copy 2016 </a>
+        <span class="span-footer hidden-xs"><b>.</b></span>
+        <a href="<%= terms_path %>"> Terms & Conditions </a>
+        <span class="span-footer hidden-xs"><b>.</b></span>
+        <a href="#"> FAQ </a>
+        <span class="span-footer hidden-xs"><b>.</b></span>
+        <a href="#"> Advertisers </a>
+        <span class="span-footer hidden-xs"><b>.</b></span>
+        <a href="<%= about_path %>"> About Us </a>
+        <span class="span-footer hidden-xs"><b>.</b></span>
+        <a href="#"> Privacy </a>
+        <span class="span-footer hidden-xs"><b>.</b></span>
+        <a> Find us on </a>
+        <a href="https://www.facebook.com/openbuild.co/" class="a-footer"><i class="fa fa-facebook i-footer " style="margin: 0 10px;"></i></a>
+        <a href="#" class="a-footer"><i class="fa fa-twitter i-footer" style="margin: 0 10px;"></i></a>
+        <a href="#" class="a-footer"><i class="fa fa-pinterest i-footer" style="margin: 0 10px;"></i></a>
+        <a href="#" class="a-footer"><i class="fa fa-fa fa-google-plus i-footer" style="margin: 0 10px;"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- old footer -->
+<%#
+loop_footer_tabs = {
+  'Terms & Conditions'  => terms_path,
+  'About'               => about_path#,
+  #'Customer Service'    => faq_customer_service_path
+}
+%>
+
+<!-- <div id="footer_wrapper" class='row'>
+  <div  class='nine large-9 columns'>
+    <ul id='main-footer-tabs' class='inline-list'>
+      <%# loop_footer_tabs.each_pair do |tab_name, tab_path| %>
+        <li> <%#= link_to_unless_current tab_name, tab_path %> </li>
+      <%# end %>
+    </ul>
+  </div>
+</div> -->

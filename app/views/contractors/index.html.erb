@@ -1,0 +1,46 @@
+
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'products_page.css' %>
+<% end %>
+
+<div id='featured_item' class='nine columns'>
+
+  <div id='interesting_items' >
+    <ul id='interesting_items-list'>
+      <% @contractors.each_with_index do |contractor, i| %>
+        <li id='interesting_product_<%= i %>' class=''>
+          <div class='interesting_items-image'>
+
+            <%= link_to contractor_path(contractor), title: contractor.company_name do %>
+                
+              <div class='no-hover-show'>
+
+                <div class='hover-details unfade'>
+                  <p class='bottom-hover-details'>
+                    <%= contractor.first_name + contractor.last_name %>
+                  </p>
+                </div>
+              </div>
+
+              <%= avatar contractor %>
+
+            <% end %>
+          </div>
+          <div class='interesting_items-details'>
+            <%= link_to "Market Place", market_places_products_path(contractor: contractor.slug) %><br/>
+          </div>
+
+        </li>
+      <% end %>
+    </ul>
+    <div class='clearfix'></div>
+  </div>
+
+
+</div>
+
+<div id='right_side_panel' class='three columns last'>
+  <div id='right_side_panel_promo' class=''>
+    <!-- promo -->
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<hr/>
+<div>
+  <h5><b><%= comment.author.try(:name) %></b> says:</h5>
+  <p><%= comment.note %></p>
+  <p><%= I18n.localize(comment.created_at, :format => :us_time) %></p>
+</div>
